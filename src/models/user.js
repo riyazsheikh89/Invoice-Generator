@@ -37,7 +37,7 @@ userSchema.methods.comparePassword = function(password) {
 userSchema.methods.generateToken = function() {
     const token = jwt.sign(
         {id: this._id, email: this.email},  // this info is used to create the JWT
-        process.env.JWT_KEY,                // secrect key: to sign the JWT
+        process.env.JWT_SECRET_KEY,                // secrect key: to sign the JWT
         {expiresIn: process.env.JWT_EXPIRES_IN} // JWT expiry time
     );
     return token;
