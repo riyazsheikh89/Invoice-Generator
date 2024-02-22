@@ -1,3 +1,4 @@
+import { generateInvoice } from "../config/pdf-generator.js";
 import Order from "../models/order.js";
 
 const createOrder = async (req, res) => {
@@ -7,18 +8,16 @@ const createOrder = async (req, res) => {
             userId: req.userId, 
             products
         });
-        return res.status(201).json({
-            success: true,
-            message: "Successfuly created your order",
-            data: order,
-            err: {}
-        });
+        const invoice_pdf = await generateInvoice(products);
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename=invoice.pdf');
+        return res.status(201).send(invoice_pdf);
     } catch (error) {
         return res.status(500).json({
             success: false,
             data: {},
             message: 'Something went wrong while creating order!',
-            err
+            err: error.message ? error.message : error
         });
     }
 }
