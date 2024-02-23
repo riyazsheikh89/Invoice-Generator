@@ -36,7 +36,7 @@ const login = async (req, res) => {
             throw "Incorrect email or password! please check your credentials";
         } else {
             const auth_token = user.generateToken(); // will generate the JWT
-            return res.status(201).json({
+            return res.status(200).json({
                 success: true,
                 data: auth_token,
                 message: "Successfully logged into your account",
