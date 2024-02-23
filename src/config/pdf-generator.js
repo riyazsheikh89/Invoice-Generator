@@ -1,8 +1,8 @@
 import puppeteer from "puppeteer";
 
-export const generateInvoice = async (products) => {
+export const generateInvoice = async (products, orderDate) => {
     // Create a HTML string for the invoice
-    const html = generateInvoiceHTML(products);
+    const html = generateInvoiceHTML(products, orderDate);
 
     // Launch a headless browser using Puppeteer
     const browser = await puppeteer.launch();
@@ -17,7 +17,7 @@ export const generateInvoice = async (products) => {
     return pdfBuffer;
 };
 
-function generateInvoiceHTML(products) {
+function generateInvoiceHTML(products, orderDate) {
 
     //calculate the total amout of products
     const sumReducer = (totalCost, product) => {
@@ -224,7 +224,7 @@ function generateInvoiceHTML(products) {
       <div class="info">
         <p>
           <small>
-            Valid untill: <strong>14/04/23</strong>
+            Order Date: <strong>${orderDate}</strong>
           </small>
         </p>
       </div>

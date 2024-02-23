@@ -23,7 +23,10 @@ const orderSchema = new mongoose.Schema({
             type: Number,
             required: true
         }
-    }]
+    }],
+    invoice: {
+        type: String,
+    }
 }, {timestamps: true});
 
 const Order = mongoose.model("Order", orderSchema);
