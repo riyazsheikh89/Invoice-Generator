@@ -15,6 +15,9 @@ app.use(express.urlencoded({extended: true}));
 
 
 app.use('/api/v1', apiRoutes);
+app.get('/test', (req, res) => {
+    res.send("BACKEND is working fine!");
+})
 
 
 app.listen(PORT, async () => {
